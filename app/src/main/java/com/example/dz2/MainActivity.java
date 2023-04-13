@@ -2,6 +2,8 @@ package com.example.dz2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,7 +11,7 @@ import android.widget.TextView;
 
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity implements View.OnClickListener {
 
     TextView tvOut;
     Button btnOk;
@@ -18,10 +20,11 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Called when the activity is first created.
      */
+    @SuppressLint("MissingInflatedId")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.main);
 
         // найдем View-элементы
         tvOut = (TextView) findViewById(R.id.tvOut);
@@ -29,13 +32,12 @@ public class MainActivity extends AppCompatActivity {
         btnCancel = (Button) findViewById(R.id.btnCancel);
 
         // присваиваем обработчик кнопкам
-        btnOk.setOnClickListener((View.OnClickListener) this);
-        btnCancel.setOnClickListener((View.OnClickListener) this);
+        btnOk.setOnClickListener(this);
+        btnCancel.setOnClickListener(this);
     }
 
-
-    //@Override
-    public void onClickStart(View v) {
+    @Override
+    public void onClick(View v) {
         // по id определеяем кнопку, вызвавшую этот обработчик
         switch (v.getId()) {
             case R.id.btnOk:
